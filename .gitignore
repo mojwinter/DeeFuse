@@ -1,0 +1,28 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.so
+
+# virtual-envs
+venv/
+.venv/
+env/
+ENV/
+ipenv/
+
+# distribution / build
+build/
+dist/
+*.egg-info/
+*.spec
+
+# PyInstaller output
+*.exe
+
+# IDE / editor
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
