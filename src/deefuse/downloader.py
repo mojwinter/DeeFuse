@@ -1,5 +1,3 @@
-# your-project/downloader.py
-
 import subprocess
 from .config import DEEMIX_CLI, DOWNLOAD_PATH, BITRATES_PREFER
 

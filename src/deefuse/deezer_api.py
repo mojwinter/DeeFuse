@@ -1,5 +1,3 @@
-# your-project/deezer_api.py
-
 import requests
 from typing import List, Dict, Any, Optional, Tuple
 from .config import DEEZER_API_URL
