@@ -13,6 +13,7 @@ from .progress_dialog import ProgressDialog
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
+        self.iconbitmap("assets/deefuse_desktop.ico")
         self.title("DeeFuse")
         self.geometry("1400x880")
         self.minsize(1200, 700)
