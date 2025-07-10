@@ -5,7 +5,7 @@
   justify-content: center;
 ">
   <img 
-    src="https://github.com/user-attachments/assets/8c4bb793-66d8-4a52-b30a-ca46023c1a92" 
+    src="https://github.com/user-attachments/assets/09298035-dcb7-4762-a6f3-e27165714beb" 
     alt="deefuse_logo_high_dpi" 
     style="
       max-width: 100%;
