@@ -27,3 +27,6 @@ dependencies = [
 
 [project.scripts]
 deefuse = "deefuse.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

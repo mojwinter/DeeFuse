@@ -1,4 +1,4 @@
-from .ui.main_window import App   # relative import (the dot is important)
+from deefuse.ui.main_window import App
 
 
 def main() -> None:               # noqa: D401
