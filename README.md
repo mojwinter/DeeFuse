@@ -16,6 +16,14 @@
 </div>
 
 # DeeFuse
+[![PyPI](https://img.shields.io/pypi/v/deefuse)](https://pypi.org/project/deefuse/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/deefuse)](https://pypi.org/project/deefuse/)
+[![License](https://img.shields.io/github/license/mojwinter/DeeFuse)](https://github.com/mojwinter/DeeFuse/blob/main/LICENSE)
+[![Build](https://github.com/mojwinter/DeeFuse/actions/workflows/build.yml/badge.svg)](https://github.com/mojwinter/DeeFuse/actions/workflows/build.yml)
+[![GitHub release](https://img.shields.io/github/v/release/mojwinter/DeeFuse)](https://github.com/mojwinter/DeeFuse/releases)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/mojwinter/DeeFuse/total)
+[![Issues](https://img.shields.io/github/issues/mojwinter/DeeFuse)](https://github.com/mojwinter/DeeFuse/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/mojwinter/DeeFuse/issues)
 
 DeeFuse is a desktop application for upgrading your existing music library using tracks downloaded from Deezer. It scans your existing files, finds matches via the Deezer API and downloads the highest quality versions using the `deemix` command line interface. This aims to improve bitrate, metadata and organization.
 
