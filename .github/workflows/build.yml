@@ -13,6 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
       - name: Install build tools
         run: |
           python -m pip install --upgrade pip
@@ -22,16 +27,27 @@ jobs:
         run: |
           python -m build --wheel
 
-      - name: Upload wheel to release
+      - name: Upload wheel to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: dist/*.whl
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
 
   build-win-exe:
     runs-on: windows-latest
     needs: build-wheel
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -42,7 +58,7 @@ jobs:
         run: |
           pyinstaller --noconsole --onefile -n DeeFuse run_deefuse.py
 
-      - name: Upload EXE to release
+      - name: Upload EXE to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: dist/DeeFuse.exe
