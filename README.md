@@ -27,6 +27,17 @@ pip install .
 
 This will install a `deefuse` entry point.
 
+## Building a standalone executable
+
+Use PyInstaller's module mode to bundle the application:
+
+```bash
+pyinstaller --noconsole --onefile -n DeeFuse -m deefuse
+```
+
+Running in module mode ensures the package context is correctly set when the
+executable starts.
+
 ## Usage
 
 Run the program either with the installed command or via the module:
