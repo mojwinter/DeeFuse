@@ -1,3 +1,20 @@
+<div style="
+  background: white;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+">
+  <img 
+    src="https://github.com/user-attachments/assets/8c4bb793-66d8-4a52-b30a-ca46023c1a92" 
+    alt="deefuse_logo_high_dpi" 
+    style="
+      max-width: 100%;
+      height: auto;
+      display: block;
+    "
+  />
+</div>
+
 # DeeFuse
 
 DeeFuse is a desktop application for upgrading your existing music library using tracks downloaded from Deezer. It scans your existing files, finds matches via the Deezer API and downloads the highest quality versions using the `deemix` command line interface. This aims to improve bitrate, metadata and organization.
