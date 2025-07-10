@@ -16,7 +16,7 @@
 </div>
 
 # DeeFuse
-[![PyPI](https://img.shields.io/pypi/v/DeeFuse)](https://pypi.org/project/DeeFuse/)
+[![PyPI](https://img.shields.io/pypi/v/deefuse)](https://pypi.org/project/deefuse/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/deefuse)](https://pypi.org/project/deefuse/)
 [![License](https://img.shields.io/github/license/mojwinter/DeeFuse)](https://github.com/mojwinter/DeeFuse/blob/main/LICENSE)
 [![Build](https://github.com/mojwinter/DeeFuse/actions/workflows/build.yml/badge.svg)](https://github.com/mojwinter/DeeFuse/actions/workflows/build.yml)
