@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   build-wheel:
@@ -31,12 +32,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: dist/*.whl
-
+          
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
 
   build-win-exe:
     runs-on: windows-latest
@@ -56,9 +54,9 @@ jobs:
 
       - name: Build EXE with PyInstaller
         run: |
-          pyinstaller --noconsole --onefile \
-            --icon assets/deefuse_desktop.ico \
-            --add-data "assets/deefuse_desktop.ico;assets" \
+          pyinstaller --noconsole --onefile ^
+            --icon assets/deefuse_desktop.ico ^
+            --add-data "assets/deefuse_desktop.ico;assets" ^
             -n DeeFuse run_deefuse.py
 
       - name: Upload EXE to GitHub Release
