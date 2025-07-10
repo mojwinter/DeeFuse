@@ -1,6 +1,7 @@
 import os
 import re
 import difflib
+import sys
 from deefuse.config import DURATION_TOLERANCE_SEC
 
 # ── REGEX FOR PARSING ───────────────────────────────────────────────────
@@ -56,3 +57,9 @@ def normalize_relaxed_title(title: str) -> str:
 def get_string_ratio(a: str, b: str) -> float:
     """Calculates the similarity ratio between two strings."""
     return difflib.SequenceMatcher(None, a, b).ratio()
+
+
+def asset_path(relative: str) -> str:
+    """Return absolute path to resource, works for dev and PyInstaller."""
+    base = getattr(sys, "_MEIPASS", os.path.abspath(os.path.dirname(__file__)))
+    return os.path.join(base, relative)
