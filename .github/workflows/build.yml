@@ -3,6 +3,9 @@ name: Build & Release
 on:
   push:
     tags: ["v*.*.*"]
+    
+permissions:
+  contents: write 
 
 jobs:
   build-wheel:
@@ -26,8 +29,8 @@ jobs:
       - name: Build EXE with PyInstaller
         run: |
           python -m pip install --upgrade pip pyinstaller
-          pyinstaller --noconsole --onefile -n DeemixHybridGUI src/deemix_gui/__main__.py
+          pyinstaller --noconsole --onefile -n DeemixHybridGUI src/deefuse/__main__.py
       - name: Upload EXE to release
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/DeemixHybridGUI.exe
+          files: dist/DeeFuse.exe
