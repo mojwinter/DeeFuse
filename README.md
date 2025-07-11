@@ -57,10 +57,7 @@ This will install a `deefuse` entry point.
 Use PyInstaller's module mode to bundle the application:
 
 ```bash
-pyinstaller --noconsole --onefile \
-  --icon assets/deefuse_desktop.ico \
-  --add-data "assets/deefuse_desktop.ico;assets" \
-  -n DeeFuse -m deefuse
+pyinstaller --noconsole --onefile --name DeeFuse --icon assets/deefuse_desktop.ico src/deefuse/__main__.py
 ```
 
 Running in module mode ensures the package context is correctly set when the

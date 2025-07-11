@@ -53,11 +53,9 @@ jobs:
           pip install .[dev]
 
       - name: Build EXE with PyInstaller
-        run: |
-          pyinstaller --noconsole --onefile ^
-            --icon assets/deefuse_desktop.ico ^
-            --add-data "assets/deefuse_desktop.ico;assets" ^
-            -n DeeFuse run_deefuse.py
+      - name: Build EXE
+        run: pyinstaller --noconsole --onefile --name DeeFuse --icon assets/deefuse_desktop.ico src/deefuse/__main__.py
+
 
       - name: Upload EXE to GitHub Release
         uses: softprops/action-gh-release@v1
