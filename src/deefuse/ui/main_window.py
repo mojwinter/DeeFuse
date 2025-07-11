@@ -8,6 +8,7 @@ from mutagen import File as MutagenFile
 # Import from our refactored modules
 from deefuse import utils, config, csv_handler, downloader, deezer_api
 from .progress_dialog import ProgressDialog
+from .settings_window import SettingsWindow
 
 
 class App(ctk.CTk):
@@ -404,3 +405,12 @@ class App(ctk.CTk):
         self.detail_textbox.delete("1.0", "end")
         self.detail_textbox.insert("end", detail_text)
         self.detail_textbox.configure(state="disabled")
+
+    def _open_settings(self):
+        """Open the settings window."""
+        SettingsWindow(self, on_save=self._settings_saved)
+
+    def _settings_saved(self):
+        """Reload data when settings have been changed."""
+        self.skipped_rows, _ = csv_handler.load_skipped()
+        self.event_generate("<<RefreshUI>>")

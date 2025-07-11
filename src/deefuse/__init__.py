@@ -6,6 +6,7 @@ and defines the package version.
 """
 __all__ = [
     "config",
+    "settings",
     "utils",
     "csv_handler",
     "deezer_api",
