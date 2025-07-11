@@ -1,27 +1,65 @@
-build-win-exe:
-  runs-on: windows-latest
-  needs: build-wheel
+name: Build & Release
 
-  steps:
-    - uses: actions/checkout@v4
+on:
+  push:
+    tags: ["v*.*.*"]
 
-    - uses: actions/setup-python@v5
-      with:
-        python-version: "3.11"
+permissions:
+  contents: write
+  id-token: write
 
-    - name: Install build deps
-      run: |
-        python -m pip install --upgrade pip
-        pip install .[dev] pyinstaller
+jobs:
+  build-wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
-    - name: Build EXE with PyInstaller
-      run: |
-        pyinstaller --noconsole --onefile `
-                    --name DeeFuse `
-                    --icon assets/deefuse_desktop.ico `
-                    src/deefuse/__main__.py
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Upload EXE to GitHub Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: dist/DeeFuse.exe
+      - name: Install build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+
+      - name: Build wheel
+        run: |
+          python -m build --wheel
+
+      - name: Upload wheel to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/*.whl
+          
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+  build-win-exe:
+    runs-on: windows-latest
+    needs: build-wheel
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[dev]
+
+      - name: Build EXE with PyInstaller
+        run: |
+          pyinstaller --noconsole --onefile ^
+            --icon assets/deefuse_desktop.ico ^
+            --add-data "assets/deefuse_desktop.ico;assets" ^
+            -n DeeFuse run_deefuse.py
+
+      - name: Upload EXE to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/DeeFuse.exe
