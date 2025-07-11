@@ -39,7 +39,7 @@ jobs:
 
   build-win-exe:
     runs-on: windows-latest
-    needs: build-whee
+    needs: build-wheel
     steps:
       - uses: actions/checkout@v4
 
