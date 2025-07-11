@@ -177,4 +177,3 @@ class SettingsWindow(ctk.CTkToplevel):
         config.reload_settings(settings)
         if callable(self.on_save):
             self.on_save()
-        self.destroy()
