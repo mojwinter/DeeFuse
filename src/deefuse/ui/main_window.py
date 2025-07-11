@@ -13,13 +13,16 @@ from .progress_dialog import ProgressDialog
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        icon = utils.asset_path("assets/deefuse_desktop.ico")
+        # Fix: Use absolute path from project root for the icon
+        import os
+        project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../'))
+        icon_path = os.path.join(project_root, 'assets', 'deefuse_desktop.ico')
         try:
-            self.iconbitmap(icon)
+            self.iconbitmap(icon_path)
         except Exception:
             pass
         self.title("DeeFuse")
-        self.geometry("1400x880")
+        self.geometry("1400x960")
         self.minsize(1200, 700)
 
         # App state
@@ -109,33 +112,47 @@ class App(ctk.CTk):
                                       hover_color="#23913c", width=120)
         self.scan_btn.grid(row=0, column=3)
 
-        # --- Skipped Tracks Table ---
-        ctk.CTkLabel(self, text="Skipped Tracks", font=self.font_h2).grid(row=2, column=0, sticky="w", padx=20,
-                                                                          pady=(10, 0))
+        # --- Skipped Tracks Section ---
+        skip_bar = ctk.CTkFrame(self, fg_color="#232b36", corner_radius=10, height=44)
+        skip_bar.grid(row=2, column=0, sticky="ew", padx=16, pady=(12, 2))
+        skip_bar.columnconfigure(0, weight=1)
+        ctk.CTkLabel(skip_bar, text="Skipped Tracks", font=self.font_h2, fg_color="transparent").grid(row=0, column=0, sticky="w", padx=(16, 0), pady=8)
+        ctk.CTkButton(skip_bar, text="Search Deezer", command=self._manual_search, height=32, width=140).grid(row=0, column=1, sticky="e", padx=(0, 12), pady=6)
         skip_frame, self.skip_tv = self._create_treeview(self, config.SKIP_HDR, 8)
-        skip_frame.grid(row=3, column=0, sticky="ew", padx=20)
+        skip_frame.grid(row=3, column=0, sticky="ew", padx=20, pady=(0, 12))
         self.skip_tv.bind("<<TreeviewSelect>>", self._on_skipped_track_select)
 
-        # --- Deezer Results Table ---
-        ctk.CTkLabel(self, text="Deezer Results", font=self.font_h2).grid(row=4, column=0, sticky="w", padx=20,
-                                                                          pady=(8, 0))
+        # --- Deezer Results Section ---
+        dz_bar = ctk.CTkFrame(self, fg_color="#232b36", corner_radius=10, height=44)
+        dz_bar.grid(row=4, column=0, sticky="ew", padx=16, pady=(0, 2))
+        dz_bar.columnconfigure(0, weight=1)
+        ctk.CTkLabel(dz_bar, text="Deezer Results", font=self.font_h2, fg_color="transparent").grid(row=0, column=0, sticky="w", padx=(16, 0), pady=8)
+        ctk.CTkButton(dz_bar, text="Download Track", command=self._manual_download, fg_color="#28a745", hover_color="#23913c", height=32, width=140).grid(row=0, column=1, sticky="e", padx=(0, 12), pady=6)
         dz_frame, self.dz_tv = self._create_treeview(self, ["Track", "Artist", "Album", "Duration"], 5)
-        dz_frame.grid(row=5, column=0, sticky="ew", padx=20)
+        dz_frame.grid(row=5, column=0, sticky="ew", padx=20, pady=(0, 12))
         self.dz_tv.bind("<<TreeviewSelect>>", self._show_detail_view)
         self.dz_tv.bind("<Double-1>", self._on_deezer_result_double_click)
 
-        # --- Download Progress Table ---
-        ctk.CTkLabel(self, text="Download Progress", font=self.font_h2).grid(row=6, column=0, sticky="w", padx=20,
-                                                                             pady=(8, 0))
+        # --- Download Progress Section ---
+        dl_bar = ctk.CTkFrame(self, fg_color="#232b36", corner_radius=10, height=44)
+        dl_bar.grid(row=6, column=0, sticky="ew", padx=16, pady=(0, 2))
+        dl_bar.columnconfigure(0, weight=1)
+        ctk.CTkLabel(dl_bar, text="Download Progress", font=self.font_h2, fg_color="transparent").grid(row=0, column=0, sticky="w", padx=(16, 0), pady=8)
+        ctk.CTkButton(dl_bar, text="Clear Progress", command=self._clear_download_progress, fg_color="#e8b202", hover_color="#d39e00", height=32, width=140).grid(row=0, column=1, sticky="e", padx=(0, 12), pady=6)
         dl_frame, self.dl_tv = self._create_treeview(self, ["Status", "Track", "Artist", "Album"], 5)
-        dl_frame.grid(row=7, column=0, sticky="nsew", padx=20)
+        dl_frame.grid(row=7, column=0, sticky="nsew", padx=20, pady=(0, 12))
 
         # --- Detail View ---
         self.detail_textbox = ctk.CTkTextbox(self, height=70, font=("Consolas", 10), wrap="word", state="disabled")
-        self.detail_textbox.grid(row=8, column=0, sticky="ew", padx=20, pady=8)
+        self.detail_textbox.grid(row=8, column=0, sticky="ew", padx=20, pady=(0, 8))
 
-        # --- Bottom Buttons ---
+        # --- Bottom Bar Separator ---
+        sep = ctk.CTkFrame(self, height=2, fg_color="#222831")
+        sep.grid(row=9, column=0, sticky="ew", padx=0, pady=(0, 0))
+
+        # --- Bottom Bar (Button Row) ---
         btn_row = ctk.CTkFrame(self, fg_color="transparent")
+<<<<<<< Updated upstream
         btn_row.grid(row=9, column=0, pady=(0, 12))
         ctk.CTkButton(btn_row, text="Search Deezer", command=self._manual_search).pack(side="left", padx=6)
         ctk.CTkButton(btn_row, text="Download Track", command=self._manual_download, fg_color="#28a745",
@@ -144,6 +161,18 @@ class App(ctk.CTk):
                       hover_color="#d39e00").pack(side="left", padx=6)
         ctk.CTkButton(btn_row, text="Exit", command=self.destroy, fg_color="#dc3545", hover_color="#bd2c3a").pack(
             side="right", padx=6)
+=======
+        btn_row.grid(row=10, column=0, pady=(8, 12), sticky="ew")
+        btn_row.columnconfigure(0, weight=1)
+        btn_row.columnconfigure(1, weight=1)
+        ctk.CTkButton(
+            btn_row, text="Settings", command=self._open_settings, height=36, width=120
+        ).grid(row=0, column=0, padx=6, sticky="w")
+        ctk.CTkButton(
+            btn_row, text="Exit", command=self.destroy,
+            fg_color="#dc3545", hover_color="#bd2c3a", height=36, width=120
+        ).grid(row=0, column=1, padx=6, sticky="e")
+>>>>>>> Stashed changes
 
     # --- Event Handlers & Actions ---
 
