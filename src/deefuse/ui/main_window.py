@@ -152,16 +152,6 @@ class App(ctk.CTk):
 
         # --- Bottom Bar (Button Row) ---
         btn_row = ctk.CTkFrame(self, fg_color="transparent")
-<<<<<<< Updated upstream
-        btn_row.grid(row=9, column=0, pady=(0, 12))
-        ctk.CTkButton(btn_row, text="Search Deezer", command=self._manual_search).pack(side="left", padx=6)
-        ctk.CTkButton(btn_row, text="Download Track", command=self._manual_download, fg_color="#28a745",
-                      hover_color="#23913c").pack(side="left", padx=6)
-        ctk.CTkButton(btn_row, text="Clear Progress", command=self._clear_download_progress, fg_color="#ffc107",
-                      hover_color="#d39e00").pack(side="left", padx=6)
-        ctk.CTkButton(btn_row, text="Exit", command=self.destroy, fg_color="#dc3545", hover_color="#bd2c3a").pack(
-            side="right", padx=6)
-=======
         btn_row.grid(row=10, column=0, pady=(8, 12), sticky="ew")
         btn_row.columnconfigure(0, weight=1)
         btn_row.columnconfigure(1, weight=1)
@@ -172,7 +162,6 @@ class App(ctk.CTk):
             btn_row, text="Exit", command=self.destroy,
             fg_color="#dc3545", hover_color="#bd2c3a", height=36, width=120
         ).grid(row=0, column=1, padx=6, sticky="e")
->>>>>>> Stashed changes
 
     # --- Event Handlers & Actions ---
 
